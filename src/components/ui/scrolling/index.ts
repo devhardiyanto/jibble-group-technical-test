@@ -1,0 +1,1 @@
+export { default as Simplebar } from "./Simplebar.vue"
