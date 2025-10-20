@@ -2,9 +2,9 @@ import client from '@/lib/client'
 import type { Movie } from '@/types/movie'
 import type { MovieResponse } from '@/types/api'
 
-export const movieService = {
-  async getMovies(params?: { page?: number; search?: string }): Promise<MovieResponse<Movie>> {
-    const { data } = await client.get('/movies', { params })
+export const MovieService = {
+  async getMovies(params?: { page?: number; Title?: string }): Promise<MovieResponse<Movie>> {
+    const { data } = await client.get('/movies/search', { params })
     return data
   },
 

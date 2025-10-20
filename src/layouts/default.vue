@@ -8,6 +8,7 @@ import {
 import { Darkmode } from "@/components/ui/darkmode"
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { Simplebar } from "@/components/ui/scrolling";
 
 const route = useRoute()
 
@@ -45,7 +46,9 @@ const breadcrumbText = computed(() => {
 
     <div class="px-4">
       <div class="space-y-4 h-dvh">
-        <router-view />
+        <Simplebar class="h-dvh pr-4">
+          <router-view />
+        </Simplebar>
       </div>
     </div>
   </div>

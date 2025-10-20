@@ -3,7 +3,7 @@ import { CardMovie } from "@/components/movie/card"
 </script>
 
 <template>
-  <div class="relative">
+  <div class="space-y-4">
     <CardMovie />
   </div>
 </template>
