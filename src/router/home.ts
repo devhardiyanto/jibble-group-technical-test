@@ -1,5 +1,5 @@
 // Layouts
-// import AuthLayout from "@/layouts/AuthLayout.vue";
+import LayoutDefault from "@/layouts/default.vue";
 
 // Pages
 const Home = () => import("@/views/home").then(m => m.Home);
@@ -7,12 +7,15 @@ const Home = () => import("@/views/home").then(m => m.Home);
 const home = [
   {
     path: "/",
-    component: Home,
+    component: LayoutDefault,
     children: [
       {
         path: "",
         name: "home",
         component: Home,
+        meta: {
+          breadcrumb: "Home Movie",
+        },
       },
     ],
   },
