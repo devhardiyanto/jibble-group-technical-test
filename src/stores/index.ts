@@ -4,6 +4,7 @@ import type { MovieResponse } from "@/types/api";
 
 interface MovieStore extends MovieResponse<Movie> {
   loading: boolean;
+  favorites: string[]; // Array of imdbID
 }
 
 const defaultMovieResponse: MovieResponse<Movie> = {
@@ -15,9 +16,15 @@ const defaultMovieResponse: MovieResponse<Movie> = {
 }
 
 export const useMovieStore = defineStore("movie", {
-  state: (): MovieStore => ({ ...defaultMovieResponse, loading: true }),
+  state: (): MovieStore => ({ 
+    ...defaultMovieResponse, 
+    loading: true,
+    favorites: []
+  }),
   getters: {
     movies: (s) => s.data,
+    favoriteMovies: (s) => s.data.filter(movie => s.favorites.includes(movie.imdbID)),
+    isFavorite: (s) => (imdbID: string) => s.favorites.includes(imdbID),
   },
   actions: {
     setLoading(loading: boolean) {
@@ -37,9 +44,17 @@ export const useMovieStore = defineStore("movie", {
       this.total = defaultMovieResponse.total;
       this.total_pages = defaultMovieResponse.total_pages;
     },
+    toggleFavorite(imdbID: string) {
+      const index = this.favorites.indexOf(imdbID);
+      if (index === -1) {
+        this.favorites.push(imdbID);
+      } else {
+        this.favorites.splice(index, 1);
+      }
+    },
   },
   persist: {
     key: 'movie',
-    pick: ['page', 'per_page', 'total', 'total_pages', 'data'],
+    pick: ['page', 'per_page', 'total', 'total_pages', 'data', 'favorites'],
   },
 });

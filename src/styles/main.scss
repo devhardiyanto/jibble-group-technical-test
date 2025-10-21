@@ -1,0 +1,11 @@
+@use "sass:color";
+@use "variables" as *;
+
+.card {
+  color: white;
+  transition: 0.3s ease;
+  
+  &:hover {
+    background: color.adjust($brand-primary, $lightness: -10%);
+  }
+}

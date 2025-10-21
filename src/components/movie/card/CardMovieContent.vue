@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { computed } from 'vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardAction } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 import {
   Tooltip,
@@ -9,10 +11,19 @@ import {
 } from '@/components/ui/tooltip'
 
 import { type Movie } from "@/types/movie"
+import { useMovieStore } from '@/stores/index'
+import { Star } from 'lucide-vue-next'
 
-defineProps<{
+const props = defineProps<{
   movie: Movie
 }>()
+
+const movieStore = useMovieStore()
+const isFavorite = computed(() => movieStore.isFavorite(props.movie.imdbID))
+
+const handleToggleFavorite = () => {
+  movieStore.toggleFavorite(props.movie.imdbID)
+}
 </script>
 
 <template>
@@ -33,5 +44,26 @@ defineProps<{
     <CardContent>
       ID: {{ $props.movie.imdbID }}
     </CardContent>
+    <CardAction>
+      <TooltipProvider>
+        <Tooltip :delayDuration="0">
+          <TooltipTrigger as-child>
+            <Button 
+              @click="handleToggleFavorite" 
+              variant="ghost" 
+              size="icon"
+              :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+            >
+              <Star 
+                :class="['w-5 h-5 transition-colors', isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground']"
+              />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{{ isFavorite ? 'Remove from favorites' : 'Add to favorites' }}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </CardAction>
   </Card>
 </template>

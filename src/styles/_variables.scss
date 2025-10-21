@@ -1,0 +1,8 @@
+$brand-primary: #2563eb;
+$brand-accent: #f59e0b;
+$radius-base: 10px;
+
+@mixin rounded-card {
+  border-radius: $radius-base;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}

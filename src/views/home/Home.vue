@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { CardMovie } from "@/components/movie/card"
+import { CardMovie, CardMovieFavorites } from "@/components/movie/card"
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="space-y-8">
+    <CardMovieFavorites />
     <CardMovie />
   </div>
 </template>
