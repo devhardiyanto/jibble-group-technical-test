@@ -67,7 +67,8 @@ describe('MovieService', () => {
       expect(client.get).toHaveBeenCalledWith('/movies/search', {
         params: { Title: 'Batman' },
       })
-      expect(result.data[0].Title).toBe('Batman')
+      expect(result.data).toHaveLength(2)
+      expect(result.data[0]?.Title).toBe('Batman')
     })
 
     it('should fetch movies with both page and Title params', async () => {
