@@ -40,30 +40,30 @@ const handleToggleFavorite = () => {
         </TooltipProvider>
       </CardTitle>
       <CardDescription>{{ $props.movie.Year }}</CardDescription>
+      <CardAction>
+        <TooltipProvider>
+          <Tooltip :delayDuration="0">
+            <TooltipTrigger as-child>
+              <Button 
+                @click="handleToggleFavorite" 
+                variant="ghost" 
+                size="icon"
+                :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+              >
+                <Star 
+                  :class="['w-5 h-5 transition-colors', isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground']"
+                />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{{ isFavorite ? 'Remove from favorites' : 'Add to favorites' }}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </CardAction>
     </CardHeader>
     <CardContent>
       ID: {{ $props.movie.imdbID }}
     </CardContent>
-    <CardAction>
-      <TooltipProvider>
-        <Tooltip :delayDuration="0">
-          <TooltipTrigger as-child>
-            <Button 
-              @click="handleToggleFavorite" 
-              variant="ghost" 
-              size="icon"
-              :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
-            >
-              <Star 
-                :class="['w-5 h-5 transition-colors', isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground']"
-              />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{{ isFavorite ? 'Remove from favorites' : 'Add to favorites' }}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </CardAction>
   </Card>
 </template>
